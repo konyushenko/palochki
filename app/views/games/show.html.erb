@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <style>
+      *{
+        font-family: Tahoma;
+      }
+      table, th, td{
+        text-align: center;
+        border: 2px solid black;
+        border-collapse: collapse;
+        margin: 0 auto;
+        padding: 10px 15px;
+        font-family: Tahoma;
+      }
+
+      h2{
+        color: #363636;
+        font-family: Tahoma;
+        text-align: center;
+        margin: 30px ;
+        font-size: 2em;
+      }
+      body{
+        background-color: #363636;
+      }
+      div{
+        width: 60%;
+        margin: 0 auto;
+        padding: 20px;
+        padding-top: 10px;
+        margin-top: 40px;
+        background-color: #feffee;
+      }
+      a{
+        text-decoration: none;
+        color: #363636;
+        font-family: Tahoma;
+
+
+      }
+      a:hover{
+        border-bottom: 2px solid #363636;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <p id="notice"><%= notice %></p>
+
+      <p>
+        <b>Количество ходов:</b>
+        <%= @game.steps %>
+      </p>
+
+      <p>
+        <b>Победитель:</b>
+        <%if @game.winner=="Browser"%>
+              Браузер
+        <% else %>
+              Сервер
+        <% end %>
+      </p>
+
+      <h2>Ходы</h2>
+      <table>
+        <tr>
+          <th>Игрок</th>
+          <th>Осталось палочек до хода</th>
+          <th>Ход сделан</th>
+          <th>Количество взятых палочек</th>
+        </tr>
+      	<% @game.pitches.each do |pitch| %>
+      	<tr>
+          <td><span> <%= pitch.player %></span></td>
+          <td><%= pitch.sticks %></td>
+          <td><%= pitch.created_at %></td>
+      	  <td> <%= pitch.take%> </td>
+         </tr> 
+      	<% end %>
+        <tfoot>
+          <tr>
+            <td colspan="4">Игра окончена</td>
+          </tr>
+        </tfoot>
+      </table>
+      <br>
+
+
+      <%= link_to 'Все игры', games_path %>
+    </div>
+  </body>
+</html>
